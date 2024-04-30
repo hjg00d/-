@@ -1,43 +1,54 @@
 package calculator;
 
 import java.util.Scanner;
+
 public class App {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in); 
- // 헌굴이 계속 깨진다
-        System.out.print("First number: ");
-        int num1 = sc.nextInt();
-        System.out.print("Second number: ");
-        int num2 = sc.nextInt();
+        Scanner sc = new Scanner(System.in);
 
-        System.out.println("the four fundamental arithmetic operations: "); //사칙연산 입력, +, -, *, /
-        char operator = sc.next().charAt(0);
+        while (true) { // 무한 루프
+            System.out.print("First number: ");
+            int num1 = sc.nextInt();
+            System.out.print("Second number: ");
+            int num2 = sc.nextInt();
 
-        int answer = 0;
+            System.out.println("Please enter a symbol.(+, -, *, /): ");
+            char operator = sc.next().charAt(0);
 
-        switch(operator) {
-            case '+':
-                answer = num1 + num2;
-                break;
-            case '-':
-                answer = num1 - num2;
-                break;
-            case '*':
-                answer = num1 * num2;
-                break;
-            case '/':
-                if(num2 != 0) {
-                answer = num1 / num2;
-                } else {
-                    System.out.println("0이 입력될 수 없습니다");
+            int answer = 0;
+
+            switch(operator) {
+                case '+':
+                    answer = num1 + num2;
+                    break;
+                case '-':
+                    answer = num1 - num2;
+                    break;
+                case '*':
+                    answer = num1 * num2;
+                    break;
+                case '/':
+                    if(num2 != 0) {
+                        answer = num1 / num2;
+                    } else {
+                        System.out.println("0으로 나눌 수 없습니다");
+                        return;
+                    }
+                    break;
+                default:
+                    System.out.println("올바른 연산자를 입력하세요");
                     return;
-                }
-                break; // break;를 쓰지 않으면 실행이 안된다...
-            default:
-                System.out.println("연산자를 입력하세요");
-                return;
+            }
+            System.out.println("result: = " + answer);
+
+            // 사용자가 종료를 원하는지 확인
+            System.out.println("If you type in anything, you'll continue? (Exit when you enter exit)");
+            String input = sc.next();
+            if (input.equals("exit")) {
+                break; // 루프 탈출
+            }
         }
-        System.out.println("result: = " + answer);
+        sc.close(); // Scanner 닫기
     }
 }
